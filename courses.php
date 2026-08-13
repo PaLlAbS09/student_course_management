@@ -52,14 +52,14 @@ include 'includes/nav.php';
 <script>
 function loadCourses() {
     $.ajax({
-        url: 'ajax/courses_ajax.php',
+        url: 'ajax/courses_ajax.php', 
         type: 'POST',
         data: { action: 'fetch' },
         success: function(response) {
             $('#courseTableBody').html(response);
         }
     });
-}
+} 
 
 $(document).ready(function(){
     loadCourses();
@@ -67,11 +67,11 @@ $(document).ready(function(){
     $('#addCourseForm').submit(function(e){
         e.preventDefault();
         $.ajax({
-            url: 'ajax/course_ajax.php',
+            url: 'ajax/courses_ajax.php', 
             type: 'POST',
             data: $(this).serialize(),
             success: function(response){
-                if(response === 'success') {
+                if(response.trim() === 'success') {
                     $('#addCourseModal').modal('hide');
                     $('#addCourseForm')[0].reset();
                     loadCourses();
@@ -86,14 +86,13 @@ $(document).ready(function(){
         if(confirm("Delete this course? All related enrollments will be lost.")) {
             var id = $(this).data('id');
             $.ajax({
-                url: 'ajax/course_ajax.php',
+                url: 'ajax/courses_ajax.php', 
                 type: 'POST',
                 data: { action: 'delete', id: id },
                 success: function(){ loadCourses(); }
             });
         }
     });
-});
-
+}); 
 </script>
 <?php include 'includes/footer.php'; ?>

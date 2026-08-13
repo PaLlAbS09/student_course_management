@@ -1,8 +1,16 @@
-<?php session_start(); 
+<?php 
+session_start(); 
+
 if (isset($_SESSION['admin_id'])) {
-    header("Location: dashboard/admin_dashboard.php");
+    header("Location: admin_dashboard.php"); 
     exit();
 }
+
+if (isset($_SESSION['student_id'])) {
+    header("Location: dashboard/student_dashboard.php"); 
+    exit();
+}
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">

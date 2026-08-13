@@ -1,8 +1,9 @@
 <?php 
-include 'config/auth.php'; 
+include 'includes/auth_check.php'; 
 include 'includes/header.php'; 
-include 'includes/nav.php';
+include 'includes/nav.php'; 
 ?>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-5">
@@ -45,7 +46,7 @@ $(document).ready(function(){
             $('#password-alert').html('<div class="alert alert-danger">New passwords do not match.</div>');
             return;
         }
-
+        
         $.ajax({
             url: 'Authentication/change_process.php',
             type: 'POST',
@@ -60,6 +61,7 @@ $(document).ready(function(){
             }
         });
     });
-});
+}); 
 </script>
+
 <?php include 'includes/footer.php'; ?>
