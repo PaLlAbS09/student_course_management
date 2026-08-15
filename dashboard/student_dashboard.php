@@ -36,20 +36,6 @@ $my_courses = $stmt->fetchAll();
             min-height: 100vh;
         }
 
-        /* Top Bar Navigation */
-        .top-navbar {
-            background-color: #0b0f19;
-            padding: 18px 32px;
-            border-bottom: 1px solid #1f293d;
-        }
-
-        .page-title {
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin: 0;
-        }
-
         /* Container & Inner Frame */
         .dashboard-frame {
             background-color: #0f172a;
@@ -94,29 +80,6 @@ $my_courses = $stmt->fetchAll();
             margin: 2px 0 0 0;
         }
 
-        .attempt-badge {
-            background-color: #13233b;
-            border: 1px solid #1d3b66;
-            color: #38bdf8;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            padding: 4px 12px;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .attempt-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background-color: #38bdf8;
-            border-radius: 50%;
-        }
-
-        /* Course Cards Styling */
         .course-card {
             background-color: #131b2e;
             border: 1px solid #1e2d4a;
@@ -181,7 +144,6 @@ $my_courses = $stmt->fetchAll();
             white-space: nowrap;
         }
 
-        /* Card Details Rows */
         .detail-row {
             display: flex;
             justify-content: space-between;
@@ -232,41 +194,29 @@ $my_courses = $stmt->fetchAll();
 </head>
 <body>
 
-    <!-- Top Bar Navigation -->
-    <div class="top-navbar d-flex justify-content-between align-items-center">
-        <h1 class="page-title">My Courses</h1>
-        <div class="d-flex align-items-center gap-3">
-            <span class="text-secondary small me-2">Hello, <strong class="text-white"><?= htmlspecialchars($_SESSION['student_name']) ?></strong></span>
-            
-            <a href="../Authentication/student_logout.php" class="btn btn-outline-danger btn-sm ms-2" title="Logout">
-                <i class="bi bi-box-arrow-right"></i>
-            </a>
-        </div>
-    </div>
+    
+    <?php include '../includes/student_nav.php'; ?>
 
-    <!-- Main Container -->
+   
     <div class="container-fluid px-4 py-4">
         <div class="dashboard-frame">
             
-            <!-- Section Header -->
+          
             <div class="section-header">
                 <div class="section-title-tag">
                     <h5>MY COURSES</h5>
                     <p>Your active courses and payment details</p>
                 </div>
-                <div class="attempt-badge">
-                    ATTEMPT 1
-                </div>
             </div>
 
-            <!-- Cards Grid -->
+            
             <?php if(count($my_courses) > 0): ?>
                 <div class="row g-4">
                     <?php foreach($my_courses as $course): ?>
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="course-card">
                                 <div>
-                                    <!-- Header Box inside Card -->
+                                    
                                     <div class="card-header-custom">
                                         <div class="course-icon-box">
                                             <i class="bi bi-mortarboard-fill"></i>
@@ -275,7 +225,7 @@ $my_courses = $stmt->fetchAll();
                                         <span class="status-badge">ENROLLED</span>
                                     </div>
 
-                                    <!-- Detail Rows -->
+                                   
                                     <div class="detail-row">
                                         <span class="detail-label">Duration</span>
                                         <span class="detail-value"><?= htmlspecialchars($course['duration']) ?> months</span>
@@ -291,7 +241,7 @@ $my_courses = $stmt->fetchAll();
                                     </div>
                                 </div>
 
-                                <!-- Highlighted Bottom Fee Banner -->
+                                
                                 <div class="fee-highlight-box">
                                     <span class="fee-label">Your Course Fee</span>
                                     <span class="fee-amount">₹<?= number_format($course['fees'] ?? 0, 2) ?></span>

@@ -1,25 +1,21 @@
 <?php
-
 $currentPage = basename($_SERVER['PHP_SELF']);
+$inDashboard = (basename(dirname($_SERVER['PHP_SELF'])) === 'dashboard');
+$base = $inDashboard ? '../' : './';
 ?>
-
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
 <style>
-  
     body {
         padding-left: 280px;
     }
 
-    
     .sidebar {
         position: fixed;
         top: 0;
         left: 0;
         width: 280px;
         height: 100vh;
-        background-color: #070b14; 
+        background-color: #070b14;
         display: flex;
         flex-direction: column;
         border-right: 1px solid #1e293b;
@@ -27,11 +23,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         font-family: 'Inter', sans-serif;
     }
 
-   
     .sidebar-brand {
         padding: 30px 20px;
         text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         margin-bottom: 10px;
     }
 
@@ -39,32 +34,31 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         color: #ffffff;
         font-weight: 800;
         margin: 0;
-        font-size: 1.4rem;
-        letter-spacing: 2px;
+        font-size: 1.3rem; 
+        letter-spacing: 1px;
         text-transform: uppercase;
-    }
-    
-    .sidebar-brand span {
-        color: #0ea5e9; 
+        white-space: nowrap; 
     }
 
-    
+    .sidebar-brand span {
+        color: #00e5ff;
+    }
+
     .sidebar-nav {
         flex-grow: 1;
         overflow-y: auto;
         padding: 10px 0;
     }
 
-    
     .sidebar-nav::-webkit-scrollbar {
         width: 4px;
     }
+
     .sidebar-nav::-webkit-scrollbar-thumb {
         background: #1e293b;
         border-radius: 10px;
     }
 
-   
     .nav-item-link {
         display: flex;
         align-items: center;
@@ -89,49 +83,54 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         background-color: rgba(255, 255, 255, 0.05);
     }
 
-    
     .nav-item-link.active {
-        background: linear-gradient(90deg, rgba(14, 165, 233, 0.15) 0%, transparent 100%);
+        background: linear-gradient(90deg, rgba(0, 229, 255, 0.15) 0%, transparent 100%);
         color: #ffffff;
-        border-left: 3px solid #0ea5e9;
+        border-left: 3px solid #00e5ff;
         border-radius: 0 8px 8px 0;
         margin-left: 0;
-        padding-left: 33px; 
-    }
-    
-    .nav-item-link.active i {
-        opacity: 1;
-        color: #0ea5e9;
+        padding-left: 33px;
     }
 
-   
+    .nav-item-link.active i {
+        opacity: 1;
+        color: #00e5ff;
+    }
+
     .sidebar-footer {
         padding: 20px 16px;
         background-color: #070b14;
-        border-top: 1px solid rgba(255,255,255,0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
+   
     .profile-card {
         background-color: #0f172a;
         border: 1px solid #1e293b;
         border-radius: 12px;
-        padding: 12px;
+        padding: 12px 14px;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
         margin-bottom: 16px;
     }
 
     .profile-avatar {
-        width: 42px;
-        height: 42px;
-        border-radius: 8px;
-        object-fit: cover;
-        border: 1px solid #0ea5e9;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid #00e5ff; 
+        padding: 2px; 
+        background-color: #070b14;
+        flex-shrink: 0;
     }
 
     .profile-info {
         overflow: hidden;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .profile-name {
@@ -139,6 +138,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         font-weight: 700;
         font-size: 0.9rem;
         margin: 0;
+        line-height: 1.2;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -146,16 +146,17 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     .profile-email {
         color: #64748b;
-        font-size: 0.7rem;
-        margin: 0;
+        font-size: 0.75rem;
+        margin: 4px 0 0 0;
+        line-height: 1.2;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
     .btn-logout {
-        background-color: #334155;
-        color: #f8fafc;
+        background-color: #1e202c;
+        color: #ef4444;
         border-radius: 12px;
         padding: 12px;
         display: flex;
@@ -164,63 +165,49 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         gap: 10px;
         text-decoration: none;
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 0.95rem;
         transition: all 0.2s ease;
-        width: 100%;
-        border: none;
+        border: 1px solid rgba(239, 68, 68, 0.2);
     }
 
     .btn-logout:hover {
-        background-color: #475569;
+        background-color: #ef4444;
         color: #ffffff;
     }
 </style>
 
 <aside class="sidebar">
-    <!-- Brand Logo Area -->
     <div class="sidebar-brand">
         <h3>TRISUL <span>ACADEMY</span></h3>
     </div>
-
-    <!-- Navigation Links -->
     <div class="sidebar-nav">
-        <a href="admin_dashboard.php" class="nav-item-link <?= $currentPage == 'admin_dashboard.php' ? 'active' : '' ?>">
-            <i class="bi bi-house"></i> Dashboard
+        <!-- Dynamically routed links -->
+        <a href="<?= $base ?>dashboard/student_dashboard.php" class="nav-item-link <?= $currentPage == 'student_dashboard.php' ? 'active' : '' ?>">
+            <i class="bi bi-mortarboard"></i> My Courses
         </a>
-        <a href="students.php" class="nav-item-link <?= $currentPage == 'students.php' ? 'active' : '' ?>">
-            <i class="bi bi-person"></i> Students
+        <a href="<?= $base ?>student_payments.php" class="nav-item-link <?= $currentPage == 'student_payments.php' ? 'active' : '' ?>">
+            <i class="bi bi-wallet2"></i> Payment History
         </a>
-        <a href="courses.php" class="nav-item-link <?= $currentPage == 'courses.php' ? 'active' : '' ?>">
-            <i class="bi bi-file-earmark-text"></i> Courses
+        <a href="<?= $base ?>student_support.php" class="nav-item-link <?= $currentPage == 'student_support.php' ? 'active' : '' ?>">
+            <i class="bi bi-megaphone"></i> Notices & Support
         </a>
-        <a href="enrollment.php" class="nav-item-link <?= $currentPage == 'enrollment.php' ? 'active' : '' ?>">
-            <i class="bi bi-card-checklist"></i> Enrollments
-        </a>
-        <a href="reports.php" class="nav-item-link <?= $currentPage == 'reports.php' ? 'active' : '' ?>">
-            <i class="bi bi-bar-chart"></i> Reports
-        </a>
-        <a href="manage_notices.php" class="nav-item-link <?= $currentPage == 'manage_notices.php' ? 'active' : '' ?>">
-            <i class="bi bi-megaphone"></i> Manage Notices
-        </a>
-        <a href="search.php" class="nav-item-link <?= $currentPage == 'search.php' ? 'active' : '' ?>">
-            <i class="bi bi-search"></i> Search & Sort
-        </a>
-        <a href="change_password.php" class="nav-item-link <?= $currentPage == 'change_password.php' ? 'active' : '' ?>">
-            <i class="bi bi-shield-lock"></i> Change Password
+        <a href="<?= $base ?>student_profile.php" class="nav-item-link <?= $currentPage == 'student_profile.php' ? 'active' : '' ?>">
+            <i class="bi bi-person-gear"></i> My Profile
         </a>
     </div>
-
-    
     <div class="sidebar-footer">
+        
+        <!-- Corrected Profile Card -->
         <div class="profile-card">
-            <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['admin_name'] ?? 'Admin') ?>&background=0ea5e9&color=fff&rounded=true&bold=true" alt="Avatar" class="profile-avatar">
+          
+            <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['student_name'] ?? 'Student') ?>&background=00e5ff&color=000&rounded=true&bold=true" alt="Avatar" class="profile-avatar">
             <div class="profile-info">
-                <p class="profile-name"><?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?></p>
-                <p class="profile-email"><?= htmlspecialchars($_SESSION['admin_email'] ?? 'admin@trisulacademy.com') ?></p>
+                <p class="profile-name"><?= htmlspecialchars($_SESSION['student_name'] ?? 'Student') ?></p>
+                <p class="profile-email"><?= htmlspecialchars($_SESSION['student_email'] ?? 'student@academy.com') ?></p>
             </div>
         </div>
-        
-        <a href="logout.php" class="btn-logout">
+
+        <a href="<?= $base ?>Authentication/student_logout.php" class="btn-logout">
             <i class="bi bi-box-arrow-left"></i> Logout
         </a>
     </div>

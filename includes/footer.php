@@ -1,5 +1,5 @@
 <!-- Footer -->
-    <footer class="text-center mt-5 py-3 text-muted">
+    <footer class="text-center mt-5 py-3 ">
         <div class="container">
             &copy; <?= date('Y') ?> Student Course Management System. All rights reserved.
         </div>

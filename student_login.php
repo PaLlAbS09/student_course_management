@@ -141,6 +141,11 @@ if (isset($_SESSION['student_id'])) {
             font-size: 0.85rem;
             border-radius: 8px;
         }
+        
+    
+        .helper-text {
+            color: #94a3b8;
+        }
     </style>
 </head>
 
@@ -154,22 +159,23 @@ if (isset($_SESSION['student_id'])) {
         <form id="studentLoginForm">
             <div class="mb-3">
                 <label class="form-label">Email Address</label>
-                <input type="email" name="email" class="form-control" placeholder="student@example.com" required>
+                <input type="email" name="email" class="form-control" required>
             </div>
             
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                <input type="password" name="password" class="form-control" required>
             </div>
             
             <div class="mb-4 text-end">
                 <a href="student_forget_password.php" class="custom-link">Forgot Password?</a>
             </div>
             
-            <button type="submit" class="btn btn-login w-100 mb-3">Access Portal</button>
+            <button type="submit" class="btn-login w-100 mb-3">Access Portal</button>
             
             <div class="text-center mt-3">
-                <span class="text-muted small">New here?</span> 
+                
+                <span class="helper-text small">New here?</span> 
                 <a href="student_registration.php" class="custom-link ms-1">Create Account</a>
             </div>
         </form>

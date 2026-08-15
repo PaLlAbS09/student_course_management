@@ -10,14 +10,13 @@ if (isset($_SESSION['student_id'])) {
     header("Location: dashboard/student_dashboard.php"); 
     exit();
 }
-?>
-?>
+ ?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Course Management System</title>
+    <title>Trisul Academy - Course Management</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,11 +24,10 @@ if (isset($_SESSION['student_id'])) {
     <!-- Google Fonts for Cinematic Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     
     <!-- Internal CSS to guarantee rendering -->
     <style>
-        
         body.cinematic-landing {
             background-color: #050505 !important;
             font-family: 'Montserrat', sans-serif;
@@ -42,7 +40,6 @@ if (isset($_SESSION['student_id'])) {
             align-items: center;
         }
 
-    
         .cinematic-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -61,7 +58,37 @@ if (isset($_SESSION['student_id'])) {
             width: 100%;
         }
 
+        /* --- NEW: Unique Academy Branding --- */
+        .academy-brand-container {
+            margin-bottom: 2.5rem;
+        }
+
+        .academy-brand {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #00e5ff, #ff3366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 8px;
+        }
         
+        .academy-brand::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, #00e5ff, #ff3366);
+            border-radius: 2px;
+        }
+        /* ------------------------------------ */
+
         .cinematic-subtitle {
             font-size: 0.85rem;
             font-weight: 300;
@@ -71,7 +98,6 @@ if (isset($_SESSION['student_id'])) {
             text-transform: uppercase;
         }
 
-      
         .cinematic-title {
             font-size: 3.5rem;
             font-weight: 900;
@@ -82,7 +108,6 @@ if (isset($_SESSION['student_id'])) {
             text-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-      
         .title-divider {
             width: 60px;
             height: 4px;
@@ -91,7 +116,6 @@ if (isset($_SESSION['student_id'])) {
             border-radius: 2px;
         }
 
-       
         .cinematic-card {
             background: rgba(20, 20, 20, 0.8);
             backdrop-filter: blur(10px);
@@ -101,7 +125,6 @@ if (isset($_SESSION['student_id'])) {
             min-height: 320px;
         }
 
-        
         .cinematic-card:hover {
             transform: translateY(-8px);
             background: rgba(30, 30, 30, 0.9);
@@ -130,7 +153,6 @@ if (isset($_SESSION['student_id'])) {
             line-height: 1.7;
             color: #aaaaaa;
         }
-
 
         .cinematic-btn {
             border-radius: 0;
@@ -175,8 +197,13 @@ if (isset($_SESSION['student_id'])) {
 
     <div class="container position-relative z-index-2">
         
-        <!-- Main Title -->
+        <!-- Main Title Area -->
         <div class="text-center mb-5 pb-3">
+            
+            <div class="academy-brand-container">
+                <span class="academy-brand">TRISUL ACADEMY</span>
+            </div>
+            
             <p class="cinematic-subtitle">SECURE ACCESS PORTAL</p>
             <h1 class="cinematic-title">COURSE MANAGEMENT</h1>
             <div class="title-divider"></div>
