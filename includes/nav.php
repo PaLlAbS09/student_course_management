@@ -7,19 +7,25 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 <style>
-  
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        overflow-y: auto;
+    }
+
     body {
         padding-left: 280px;
     }
 
-    
+
     .sidebar {
         position: fixed;
         top: 0;
         left: 0;
         width: 280px;
         height: 100vh;
-        background-color: #070b14; 
+        background-color: #070b14;
         display: flex;
         flex-direction: column;
         border-right: 1px solid #1e293b;
@@ -27,11 +33,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         font-family: 'Inter', sans-serif;
     }
 
-   
+
     .sidebar-brand {
         padding: 30px 20px;
         text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         margin-bottom: 10px;
     }
 
@@ -43,28 +49,29 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         letter-spacing: 2px;
         text-transform: uppercase;
     }
-    
+
     .sidebar-brand span {
-        color: #0ea5e9; 
+        color: #0ea5e9;
     }
 
-    
+
     .sidebar-nav {
         flex-grow: 1;
         overflow-y: auto;
         padding: 10px 0;
     }
 
-    
+
     .sidebar-nav::-webkit-scrollbar {
         width: 4px;
     }
+
     .sidebar-nav::-webkit-scrollbar-thumb {
         background: #1e293b;
         border-radius: 10px;
     }
 
-   
+
     .nav-item-link {
         display: flex;
         align-items: center;
@@ -89,26 +96,26 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         background-color: rgba(255, 255, 255, 0.05);
     }
 
-    
+
     .nav-item-link.active {
         background: linear-gradient(90deg, rgba(14, 165, 233, 0.15) 0%, transparent 100%);
         color: #ffffff;
         border-left: 3px solid #0ea5e9;
         border-radius: 0 8px 8px 0;
         margin-left: 0;
-        padding-left: 33px; 
+        padding-left: 33px;
     }
-    
+
     .nav-item-link.active i {
         opacity: 1;
         color: #0ea5e9;
     }
 
-   
+
     .sidebar-footer {
         padding: 20px 16px;
         background-color: #070b14;
-        border-top: 1px solid rgba(255,255,255,0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .profile-card {
@@ -210,7 +217,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </a>
     </div>
 
-    
+
     <div class="sidebar-footer">
         <div class="profile-card">
             <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['admin_name'] ?? 'Admin') ?>&background=0ea5e9&color=fff&rounded=true&bold=true" alt="Avatar" class="profile-avatar">
@@ -219,7 +226,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <p class="profile-email"><?= htmlspecialchars($_SESSION['admin_email'] ?? 'admin@trisulacademy.com') ?></p>
             </div>
         </div>
-        
+
         <a href="logout.php" class="btn-logout">
             <i class="bi bi-box-arrow-left"></i> Logout
         </a>

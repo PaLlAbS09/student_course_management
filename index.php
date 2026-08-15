@@ -26,169 +26,178 @@ if (isset($_SESSION['student_id'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     
-    <!-- Internal CSS to guarantee rendering -->
-    <style>
-        body.cinematic-landing {
-            background-color: #050505 !important;
-            font-family: 'Montserrat', sans-serif;
-            min-height: 100vh;
-            color: #ffffff !important;
-            position: relative;
-            overflow: hidden;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
+    
+   <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        overflow-y: auto; 
+    }
 
-        .cinematic-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-position: center center;
-            box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
-            z-index: 1;
-            pointer-events: none;
-        }
+    body.cinematic-landing {
+        background-color: #050505 !important;
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        color: #ffffff !important;
+        position: relative;
+        overflow-y: auto; 
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        padding: 40px 0;
+        box-sizing: border-box;
+    }
 
-        .z-index-2 {
-            z-index: 2;
-            width: 100%;
-        }
+    .cinematic-overlay {
+        position: fixed; 
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        background-position: center center;
+        box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+        z-index: 1;
+        pointer-events: none;
+    }
 
-        /* --- NEW: Unique Academy Branding --- */
-        .academy-brand-container {
-            margin-bottom: 2.5rem;
-        }
+    .z-index-2 {
+        z-index: 2;
+        width: 100%;
+    }
 
-        .academy-brand {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #00e5ff, #ff3366);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            position: relative;
-            padding-bottom: 8px;
-        }
-        
-        .academy-brand::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(90deg, #00e5ff, #ff3366);
-            border-radius: 2px;
-        }
-        /* ------------------------------------ */
+ 
+    .academy-brand-container {
+        margin-bottom: 2.5rem;
+    }
 
-        .cinematic-subtitle {
-            font-size: 0.85rem;
-            font-weight: 300;
-            letter-spacing: 8px;
-            color: #888888;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
+    .academy-brand {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 12px;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, #00e5ff, #ff3366);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+        position: relative;
+        padding-bottom: 8px;
+    }
+    
+    .academy-brand::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(90deg, #00e5ff, #ff3366);
+        border-radius: 2px;
+    }
 
-        .cinematic-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: 4px;
-            color: #ffffff;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
+    .cinematic-subtitle {
+        font-size: 0.85rem;
+        font-weight: 300;
+        letter-spacing: 8px;
+        color: #888888;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+    }
 
-        .title-divider {
-            width: 60px;
-            height: 4px;
-            background-color: #ffffff;
-            margin: 0 auto;
-            border-radius: 2px;
-        }
+    .cinematic-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        letter-spacing: 4px;
+        color: #ffffff;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
 
-        .cinematic-card {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            min-height: 320px;
-        }
+    .title-divider {
+        width: 60px;
+        height: 4px;
+        background-color: #ffffff;
+        margin: 0 auto;
+        border-radius: 2px;
+    }
 
-        .cinematic-card:hover {
-            transform: translateY(-8px);
-            background: rgba(30, 30, 30, 0.9);
-        }
+    .cinematic-card {
+        background: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        position: relative;
+        min-height: 320px;
+    }
 
-        .admin-card:hover {
-            border-color: #ff3366;
-            box-shadow: 0 15px 35px rgba(255, 51, 102, 0.15);
-        }
+    .cinematic-card:hover {
+        transform: translateY(-8px);
+        background: rgba(30, 30, 30, 0.9);
+    }
 
-        .student-card:hover {
-            border-color: #00e5ff;
-            box-shadow: 0 15px 35px rgba(0, 229, 255, 0.15);
-        }
+    .admin-card:hover {
+        border-color: #ff3366;
+        box-shadow: 0 15px 35px rgba(255, 51, 102, 0.15);
+    }
 
-        .cinematic-panel-title {
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            color: #ffffff;
-        }
+    .student-card:hover {
+        border-color: #00e5ff;
+        box-shadow: 0 15px 35px rgba(0, 229, 255, 0.15);
+    }
 
-        .cinematic-text {
-            font-weight: 300;
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: #aaaaaa;
-        }
+    .cinematic-panel-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        color: #ffffff;
+    }
 
-        .cinematic-btn {
-            border-radius: 0;
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            padding: 12px 24px;
-            background: transparent;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
+    .cinematic-text {
+        font-weight: 300;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: #aaaaaa;
+    }
 
-        .admin-btn {
-            color: #ff3366;
-            border: 1px solid #ff3366;
-        }
+    .cinematic-btn {
+        border-radius: 0;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        padding: 12px 24px;
+        background: transparent;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
 
-        .admin-btn:hover {
-            background: #ff3366;
-            color: #ffffff;
-            box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
-        }
+    .admin-btn {
+        color: #ff3366;
+        border: 1px solid #ff3366;
+    }
 
-        .student-btn {
-            color: #00e5ff;
-            border: 1px solid #00e5ff;
-        }
+    .admin-btn:hover {
+        background: #ff3366;
+        color: #ffffff;
+        box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+    }
 
-        .student-btn:hover {
-            background: #00e5ff;
-            color: #050505;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
-        }
-    </style>
+    .student-btn {
+        color: #00e5ff;
+        border: 1px solid #00e5ff;
+    }
+
+    .student-btn:hover {
+        background: #00e5ff;
+        color: #050505;
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    }
+</style>
 </head>
 <body class="cinematic-landing">
 
