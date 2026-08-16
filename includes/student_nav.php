@@ -21,6 +21,7 @@ $base = $inDashboard ? '../' : './';
         border-right: 1px solid #1e293b;
         z-index: 1000;
         font-family: 'Inter', sans-serif;
+        transition: left 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
 
     .sidebar-brand {
@@ -103,7 +104,6 @@ $base = $inDashboard ? '../' : './';
         border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-   
     .profile-card {
         background-color: #0f172a;
         border: 1px solid #1e293b;
@@ -174,14 +174,104 @@ $base = $inDashboard ? '../' : './';
         background-color: #ef4444;
         color: #ffffff;
     }
+
+    /* --- MOBILE MENU TOGGLE BUTTON --- */
+    .mobile-menu-toggle {
+        display: none;
+        position: fixed;
+        top: 15px;
+        right: 20px; 
+        z-index: 1001;
+        background: #00e5ff; 
+        color: #050505;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: background 0.3s ease;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: #0284c7;
+        color: #fff;
+    }
+
+    /* --- RESPONSIVE SIDEBAR CSS --- */
+    @media screen and (max-width: 768px) {
+        body {
+            padding-left: 0 !important;
+            padding-top: 60px !important; 
+        }
+
+        .mobile-menu-toggle {
+            display: block !important;
+        }
+
+        .sidebar {
+            left: -280px !important;
+        }
+
+        .sidebar.active {
+            left: 0 !important;
+            box-shadow: 4px 0 25px rgba(0, 0, 0, 0.7) !important; 
+        }
+    }
+
+    /* ---  320px  --- */
+    @media screen and (max-width: 576px) {
+      
+        .dashboard-frame {
+            padding: 15px !important;
+            margin-top: 10px !important;
+        }
+
+       
+        .table-custom tbody td, .table-custom thead th {
+            white-space: nowrap;
+        }
+
+      
+        .section-title-tag h2 {
+            font-size: 1.15rem !important;
+        }
+
+       
+        .finance-card, .profile-card, .security-card, .support-form {
+            padding: 15px !important;
+        }
+
+        .profile-avatar {
+            width: 40px !important;
+            height: 40px !important;
+        }
+        .fee-highlight-box {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 5px;
+        }
+
+        
+        .avatar-large {
+            width: 70px !important;
+            height: 70px !important;
+        }
+    }
 </style>
 
-<aside class="sidebar">
+<!-- Hamburger Button -->
+<button class="mobile-menu-toggle" id="studentMenuToggle" aria-label="Toggle Menu">
+    <i class="bi bi-list"></i>
+</button>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="student-sidebar">
     <div class="sidebar-brand">
         <h3>TRISUL <span>ACADEMY</span></h3>
     </div>
     <div class="sidebar-nav">
-        <!-- Dynamically routed links -->
+     
         <a href="<?= $base ?>dashboard/student_dashboard.php" class="nav-item-link <?= $currentPage == 'student_dashboard.php' ? 'active' : '' ?>">
             <i class="bi bi-mortarboard"></i> My Courses
         </a>
@@ -199,7 +289,6 @@ $base = $inDashboard ? '../' : './';
         
         <!-- Corrected Profile Card -->
         <div class="profile-card">
-          
             <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['student_name'] ?? 'Student') ?>&background=00e5ff&color=000&rounded=true&bold=true" alt="Avatar" class="profile-avatar">
             <div class="profile-info">
                 <p class="profile-name"><?= htmlspecialchars($_SESSION['student_name'] ?? 'Student') ?></p>
@@ -212,3 +301,37 @@ $base = $inDashboard ? '../' : './';
         </a>
     </div>
 </aside>
+
+<!-- Hamburger Menu -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('studentMenuToggle');
+        const sidebar = document.getElementById('student-sidebar'); 
+        const icon = menuToggle ? menuToggle.querySelector('i') : null;
+
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', function(event) {
+                event.stopPropagation(); 
+                sidebar.classList.toggle('active');
+
+                if (sidebar.classList.contains('active')) {
+                    icon.classList.remove('bi-list');
+                    icon.classList.add('bi-x-lg');
+                } else {
+                    icon.classList.remove('bi-x-lg');
+                    icon.classList.add('bi-list');
+                }
+            });
+        }
+
+        document.addEventListener('click', function(event) {
+            if (sidebar && sidebar.classList.contains('active') && !sidebar.contains(event.target)) {
+                sidebar.classList.remove('active');
+                if (icon) {
+                    icon.classList.remove('bi-x-lg');
+                    icon.classList.add('bi-list');
+                }
+            }
+        });
+    });
+</script>

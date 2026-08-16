@@ -1,8 +1,6 @@
 <?php
-
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
-
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
@@ -16,8 +14,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     body {
         padding-left: 280px;
+        background-color: #0f172a; 
     }
-
 
     .sidebar {
         position: fixed;
@@ -31,8 +29,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         border-right: 1px solid #1e293b;
         z-index: 1000;
         font-family: 'Inter', sans-serif;
+        transition: left 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
-
 
     .sidebar-brand {
         padding: 30px 20px;
@@ -54,13 +52,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         color: #0ea5e9;
     }
 
-
     .sidebar-nav {
         flex-grow: 1;
         overflow-y: auto;
         padding: 10px 0;
     }
-
 
     .sidebar-nav::-webkit-scrollbar {
         width: 4px;
@@ -70,7 +66,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         background: #1e293b;
         border-radius: 10px;
     }
-
 
     .nav-item-link {
         display: flex;
@@ -96,7 +91,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         background-color: rgba(255, 255, 255, 0.05);
     }
 
-
     .nav-item-link.active {
         background: linear-gradient(90deg, rgba(14, 165, 233, 0.15) 0%, transparent 100%);
         color: #ffffff;
@@ -110,7 +104,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         opacity: 1;
         color: #0ea5e9;
     }
-
 
     .sidebar-footer {
         padding: 20px 16px;
@@ -175,15 +168,64 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         transition: all 0.2s ease;
         width: 100%;
         border: none;
+        box-sizing: border-box;
     }
 
     .btn-logout:hover {
         background-color: #475569;
         color: #ffffff;
     }
+
+    /* --- MOBILE MENU TOGGLE BUTTON --- */
+    .mobile-menu-toggle {
+        display: none;
+        position: fixed;
+        top: 15px;
+        right: 20px; 
+        z-index: 1001;
+        background: #0ea5e9; 
+        color: #ffffff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: background 0.3s ease;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: #0284c7;
+    }
+
+    /* --- RESPONSIVE CSS --- */
+    @media screen and (max-width: 768px) {
+        body {
+            padding-left: 0 !important;
+            padding-top: 60px !important; 
+        }
+
+        .mobile-menu-toggle {
+            display: block !important;
+        }
+
+        .sidebar {
+            left: -280px !important;
+        }
+
+        .sidebar.active {
+            left: 0 !important;
+            box-shadow: 4px 0 25px rgba(0, 0, 0, 0.7) !important; 
+        }
+    }
 </style>
 
-<aside class="sidebar">
+<button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+    <i class="bi bi-list"></i>
+</button>
+
+
+<aside class="sidebar" id="trisul-sidebar">
     <!-- Brand Logo Area -->
     <div class="sidebar-brand">
         <h3>TRISUL <span>ACADEMY</span></h3>
@@ -217,7 +259,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </a>
     </div>
 
-
     <div class="sidebar-footer">
         <div class="profile-card">
             <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['admin_name'] ?? 'Admin') ?>&background=0ea5e9&color=fff&rounded=true&bold=true" alt="Avatar" class="profile-avatar">
@@ -232,3 +273,38 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </a>
     </div>
 </aside>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('menuToggle');
+        
+        
+        const sidebar = document.getElementById('trisul-sidebar'); 
+        const icon = menuToggle ? menuToggle.querySelector('i') : null;
+
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', function(event) {
+                event.stopPropagation(); 
+                sidebar.classList.toggle('active');
+
+                if (sidebar.classList.contains('active')) {
+                    icon.classList.remove('bi-list');
+                    icon.classList.add('bi-x-lg');
+                } else {
+                    icon.classList.remove('bi-x-lg');
+                    icon.classList.add('bi-list');
+                }
+            });
+        }
+
+        document.addEventListener('click', function(event) {
+            if (sidebar && sidebar.classList.contains('active') && !sidebar.contains(event.target)) {
+                sidebar.classList.remove('active');
+                if (icon) {
+                    icon.classList.remove('bi-x-lg');
+                    icon.classList.add('bi-list');
+                }
+            }
+        });
+    });
+</script>

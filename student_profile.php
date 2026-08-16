@@ -60,15 +60,25 @@ include 'includes/student_nav.php';
     }
 
   
-
-    .security-card {
-        border-top: 3px solid #ff3366;
+    .content-profile-card {
+        background-color: #131b2e;
+        border: 1px solid #1e2d4a;
+        border-radius: 12px;
+        padding: 30px;
+        display: block; 
     }
 
+    .security-card {
+        background-color: #131b2e;
+        border: 1px solid #1e2d4a;
+        border-radius: 12px;
+        padding: 30px;
+        border-top: 4px solid #ff3366; 
+    }
 
     .avatar-wrapper {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     .avatar-large {
@@ -105,8 +115,9 @@ include 'includes/student_nav.php';
         box-shadow: none;
     }
 
-    .profile-card .form-control:focus,
-    .profile-card .form-select:focus {
+   
+    .content-profile-card .form-control:focus,
+    .content-profile-card .form-select:focus {
         border-color: #0ea5e9;
     }
 
@@ -191,8 +202,9 @@ include 'includes/student_nav.php';
         </div>
 
         <div class="row g-4">
-            <div class="col-lg-7">
-                <div class="profile-card">
+            
+            <div class="col-xl-7">
+                <div class="content-profile-card">
                     <div class="avatar-wrapper">
                         <img src="https://ui-avatars.com/api/?name=<?= urlencode($student['student_name'] ?? 'Student') ?>&background=0ea5e9&color=fff&rounded=true&bold=true&size=128" alt="Profile" class="avatar-large">
                         <h4 class="text-white mt-3 mb-0"><?= htmlspecialchars($student['student_name'] ?? '') ?></h4>
@@ -230,7 +242,8 @@ include 'includes/student_nav.php';
                 </div>
             </div>
 
-            <div class="col-lg-5">
+         
+            <div class="col-xl-5">
                 <div class="security-card">
                     <h4 class="text-white mb-4"><i class="bi bi-shield-lock-fill me-2" style="color: #ff3366;"></i>Account Security</h4>
 

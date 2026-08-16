@@ -27,7 +27,7 @@ include 'includes/nav.php';
         margin-bottom: 40px;
     }
 
-    /* Green accent line for Courses */
+  
     .dashboard-frame::before {
         content: '';
         position: absolute;
@@ -55,7 +55,7 @@ include 'includes/nav.php';
         margin: 4px 0 0 0;
     }
 
-    /* Primary Action Button (Green Gradient) */
+
     .btn-add {
         background: linear-gradient(135deg, #10b981, #059669);
         border: none;
@@ -77,7 +77,7 @@ include 'includes/nav.php';
         box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
     }
 
-    /* Custom Table Styling */
+  
     .table-custom {
         margin-top: 24px;
         color: #d1d5db;
@@ -105,7 +105,6 @@ include 'includes/nav.php';
         transform: translateY(-2px);
     }
 
-    /* Force Dark Cells to prevent Bootstrap white-override */
     .table-custom tbody td {
         background-color: #131b2e !important;
         color: #f8fafc !important;
@@ -131,7 +130,7 @@ include 'includes/nav.php';
         border-radius: 0 8px 8px 0;
     }
 
-    /* Style the AJAX generated Delete button seamlessly */
+    
     .table-custom .deleteBtn {
         background-color: rgba(239, 68, 68, 0.1) !important;
         border: 1px solid rgba(239, 68, 68, 0.3) !important;
@@ -149,7 +148,6 @@ include 'includes/nav.php';
         box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
     }
 
-    /* Modal Dark Theme Styling */
     .modal-content {
         background-color: #0f172a;
         border: 1px solid #1e2d4a;
@@ -196,6 +194,35 @@ include 'includes/nav.php';
     .form-control::placeholder {
         color: #475569;
     }
+    
+    @media screen and (max-width: 576px) {
+        .dashboard-frame {
+            padding: 20px; 
+            margin: 10px;
+        }
+
+       
+        .dashboard-frame .d-flex.justify-content-between {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 15px;
+        }
+
+        .btn-add {
+            width: 100%; 
+            text-align: center;
+        }
+
+        
+        .table-custom tbody td {
+            white-space: nowrap; 
+        }
+        
+        .table-custom tbody td:nth-child(6) { 
+             white-space: normal;
+             min-width: 200px;
+        }
+    }
 </style>
 
 <div class="container mt-4">
@@ -213,7 +240,7 @@ include 'includes/nav.php';
         <div class="table-responsive">
             <table class="table table-custom">
                 <thead>
-                    <!-- FIXED HEADERS TO MATCH YOUR 7 DATA COLUMNS -->
+                    
                     <tr>
                         <th>ID</th>
                         <th>Course Name</th>
@@ -225,14 +252,14 @@ include 'includes/nav.php';
                     </tr>
                 </thead>
                 <tbody id="courseTableBody">
-                    <!-- AJAX Data Populates Here -->
+                 
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<!-- Add Course Modal -->
+
 <div class="modal fade" id="addCourseModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

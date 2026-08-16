@@ -187,6 +187,30 @@
         color: #ffffff;
         box-shadow: 0 0 12px rgba(0, 229, 255, 0.2);
     }
+   
+    @media screen and (max-width: 576px) {
+        .dashboard-frame {
+            padding: 20px; 
+            margin: 10px;
+        }
+
+        
+        .dashboard-frame .d-flex.justify-content-between {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 15px;
+        }
+
+        .btn-add {
+            width: 100%; 
+            text-align: center;
+        }
+
+      
+        .table-custom tbody td {
+            white-space: nowrap;
+        }
+    }
 </style>
 
 <div class="container mt-4">
