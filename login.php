@@ -193,11 +193,6 @@ if (isset($_SESSION['admin_id'])) {
             
             <button type="submit" class="btn btn-login w-100 mb-3">Initialize Admin</button>
             
-            <div class="text-center mt-3">
-               
-                <span class="helper-text small">New user?</span> 
-                <a href="admin_registration.php" class="custom-link ms-1">Register here</a>
-            </div>
         </form>
     </div>
 

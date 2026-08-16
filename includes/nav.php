@@ -251,6 +251,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <a href="manage_notices.php" class="nav-item-link <?= $currentPage == 'manage_notices.php' ? 'active' : '' ?>">
             <i class="bi bi-megaphone"></i> Manage Notices
         </a>
+        <a href="admin_support.php" class="nav-item-link <?= $currentPage == 'admin_support.php' ? 'active' : '' ?>">
+    <i class="bi bi-headset"></i> Support Center
+</a>
         <a href="search.php" class="nav-item-link <?= $currentPage == 'search.php' ? 'active' : '' ?>">
             <i class="bi bi-search"></i> Search & Sort
         </a>
