@@ -58,7 +58,7 @@
                 <span class="spinner-border spinner-border-sm d-none ms-2" role="status" aria-hidden="true"></span>
             </button>                
             
-            <a href="login.php" class="text-decoration-none text-danger" style="font-size: 14px;">Cancel & Return to Login</a>            
+            <a href="student_login.php" class="text-decoration-none text-danger" style="font-size: 14px;">Cancel & Return to Login</a>            
         </form>                            
     </div>
 
