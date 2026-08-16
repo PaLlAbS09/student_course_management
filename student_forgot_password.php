@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Admin Password</title>
+    <title>Reset Student Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+     
         body.dark-portal {
             background-color: #0b0f19;
             font-family: 'Inter', sans-serif;
@@ -32,12 +33,12 @@
         }
         .portal-card {
             background: #0f172a;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 229, 255, 0.2);
             border-radius: 12px;
             padding: 40px;
             width: 100%;
             max-width: 420px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.03);
             position: relative;
             z-index: 2;
         }
@@ -56,7 +57,7 @@
             line-height: 1.5;
         }
         .user-email-display {
-            color: #ffffff;
+            color: #00e5ff;
             font-weight: 600;
         }
         .form-label {
@@ -75,9 +76,9 @@
         }
         .form-control:focus {
             background-color: #131b2e;
-            border-color: #94a3b8;
+            border-color: #00e5ff;
             color: #ffffff;
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.2);
         }
         .btn-portal {
             background: #1e293b;
@@ -93,17 +94,17 @@
             color: #ffffff;
         }
         .btn-primary-portal {
-            background: #ffffff;
-            color: #0f172a;
+            background: #2563eb;
             border: none;
+            color: #ffffff;
             font-weight: 600;
             padding: 12px;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
         .btn-primary-portal:hover {
-            background: #e2e8f0;
-            color: #0f172a;
+            background: #1d4ed8;
+            color: #ffffff;
         }
         .custom-link {
             color: #94a3b8;
@@ -136,15 +137,15 @@
         <!-- STEP 1: Verify Email -->
         <div id="step1" class="step-container step-active">
             <h2 class="portal-title">Reset Password</h2>
-            <p class="portal-subtitle">Enter your admin email address to verify your account.</p>
+            <p class="portal-subtitle">Enter your email address to verify your account.</p>
             
             <form id="verifyEmailForm">
                 <div class="mb-4">
                     <label class="form-label">Email Address</label>
-                    <input type="email" id="adminEmail" class="form-control" required placeholder="admin@example.com">
+                    <input type="email" id="studentEmail" class="form-control" required placeholder="student@example.com">
                 </div>
                 <button type="submit" class="btn-portal w-100">Verify Email</button>
-                <a href="login.php" class="custom-link">Cancel & Return to Login</a>
+                <a href="student_login.php" class="custom-link">Cancel & Return to Login</a>
             </form>
         </div>
 
@@ -172,7 +173,7 @@
             <div class="success-box">
                 Password reset successfully! You can now log in.
             </div>
-            <a href="login.php" class="btn-primary-portal w-100 d-block text-center text-decoration-none">Go to Login</a>
+            <a href="student_login.php" class="btn-primary-portal w-100 d-block text-center text-decoration-none">Go to Login</a>
         </div>
 
     </div>
@@ -182,16 +183,19 @@
         $(document).ready(function() {
             let verifiedEmail = '';
 
+            
             $('#verifyEmailForm').submit(function(e) {
                 e.preventDefault();
-                verifiedEmail = $('#adminEmail').val();
+                verifiedEmail = $('#studentEmail').val();
                 
-            
+                
+                
                 $('#displayUserEmail').text(verifiedEmail);
                 $('#step1').removeClass('step-active');
                 $('#step2').addClass('step-active');
             });
 
+          
             $('#updatePasswordForm').submit(function(e) {
                 e.preventDefault();
                 const pass1 = $('#newPassword').val();
@@ -203,6 +207,7 @@
                 }
 
               
+                   
                 $('#step2').removeClass('step-active');
                 $('#step3').addClass('step-active');
             });

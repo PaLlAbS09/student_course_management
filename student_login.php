@@ -7,15 +7,14 @@ if (isset($_SESSION['student_id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal - Login</title>
+    <title>Student Login - Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body.student-login-body {
+        body.dark-portal {
             background-color: #0b0f19;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
@@ -27,9 +26,7 @@ if (isset($_SESSION['student_id'])) {
             overflow: hidden;
             margin: 0;
         }
-
-        /* Subtle background grid overlay */
-        body.student-login-body::before {
+        body.dark-portal::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -40,8 +37,7 @@ if (isset($_SESSION['student_id'])) {
             z-index: 1;
             pointer-events: none;
         }
-
-        .login-card {
+        .portal-card {
             background: #0f172a;
             border: 1px solid rgba(0, 229, 255, 0.2);
             border-radius: 12px;
@@ -52,18 +48,15 @@ if (isset($_SESSION['student_id'])) {
             position: relative;
             z-index: 2;
         }
-
-        .login-title {
+        .portal-title {
             font-weight: 800;
             font-size: 1.6rem;
             letter-spacing: 1px;
-            color: #ffffff;
             text-align: center;
             margin-bottom: 4px;
             text-transform: uppercase;
         }
-
-        .login-subtitle {
+        .portal-subtitle {
             color: #64748b;
             font-size: 0.75rem;
             text-align: center;
@@ -71,7 +64,6 @@ if (isset($_SESSION['student_id'])) {
             text-transform: uppercase;
             letter-spacing: 3px;
         }
-
         .form-label {
             color: #94a3b8;
             font-size: 0.8rem;
@@ -79,7 +71,6 @@ if (isset($_SESSION['student_id'])) {
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
         .form-control {
             background-color: #131b2e;
             border: 1px solid #1e2d4a;
@@ -89,19 +80,14 @@ if (isset($_SESSION['student_id'])) {
             font-size: 0.95rem;
             transition: all 0.3s ease;
         }
-
         .form-control:focus {
             background-color: #131b2e;
             border-color: #00e5ff;
             color: #ffffff;
             box-shadow: 0 0 12px rgba(0, 229, 255, 0.2);
         }
-
-        .form-control::placeholder {
-            color: #475569;
-        }
-
-        .btn-login {
+        .form-control::placeholder { color: #475569; }
+        .btn-portal {
             background: linear-gradient(135deg, #00e5ff, #2563eb);
             border: none;
             color: #050505;
@@ -114,26 +100,19 @@ if (isset($_SESSION['student_id'])) {
             transition: all 0.3s ease;
             box-shadow: 0 4px 20px rgba(0, 229, 255, 0.3);
         }
-
-        .btn-login:hover {
+        .btn-portal:hover {
             background: linear-gradient(135deg, #2563eb, #00e5ff);
             color: #ffffff;
             box-shadow: 0 6px 25px rgba(0, 229, 255, 0.5);
             transform: translateY(-2px);
         }
-
         .custom-link {
             color: #38bdf8;
             text-decoration: none;
             font-size: 0.85rem;
             transition: color 0.2s;
         }
-
-        .custom-link:hover {
-            color: #00e5ff;
-            text-decoration: underline;
-        }
-
+        .custom-link:hover { color: #00e5ff; text-decoration: underline; }
         .alert-dark-custom {
             background-color: #1a1518;
             border: 1px solid #ef4444;
@@ -141,41 +120,35 @@ if (isset($_SESSION['student_id'])) {
             font-size: 0.85rem;
             border-radius: 8px;
         }
-        
-    
-        .helper-text {
-            color: #94a3b8;
-        }
     </style>
 </head>
-
-<body class="student-login-body">
-    <div class="login-card">
-        <h2 class="login-title">Student Portal</h2>
-        <p class="login-subtitle">Secure Access Login</p>
+<body class="dark-portal">
+    <div class="portal-card">
+        <h2 class="portal-title">Student Portal</h2>
+        <p class="portal-subtitle">Secure Access Login</p>
         
         <div id="login-alert"></div>
         
         <form id="studentLoginForm">
             <div class="mb-3">
                 <label class="form-label">Email Address</label>
-                <input type="email" name="email" class="form-control" required>
+                <input type="email" name="email" class="form-control" required placeholder="student@example.com">
             </div>
             
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" required>
+                <input type="password" name="password" class="form-control" required placeholder="••••••••">
             </div>
             
             <div class="mb-4 text-end">
-                <a href="student_forget_password.php" class="custom-link">Forgot Password?</a>
+                <!-- Links directly to the new student forgot password file -->
+                <a href="student_forgot_password.php" class="custom-link">Forgot Password?</a>
             </div>
             
-            <button type="submit" class="btn-login w-100 mb-3">Access Portal</button>
+            <button type="submit" class="btn-portal w-100 mb-3">Access Portal</button>
             
             <div class="text-center mt-3">
-                
-                <span class="helper-text small">New here?</span> 
+                <span class="text-secondary small">New here?</span> 
                 <a href="student_registration.php" class="custom-link ms-1">Create Account</a>
             </div>
         </form>
@@ -196,14 +169,10 @@ if (isset($_SESSION['student_id'])) {
                         } else {
                             $('#login-alert').html('<div class="alert alert-dark-custom py-2 mb-3 text-center">' + response + '</div>');
                         }
-                    },
-                    error: function() {
-                        $('#login-alert').html('<div class="alert alert-dark-custom py-2 mb-3 text-center">Connection error. Please try again.</div>');
                     }
                 });
             });
         });
     </script>
 </body>
-
 </html>
