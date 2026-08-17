@@ -290,13 +290,14 @@ $base = $inDashboard ? '../' : './';
     <div class="sidebar-footer">
         
         <!-- Corrected Profile Card -->
-        <div class="profile-card">
+        <!-- Clickable Profile Card -->
+        <a href="<?= $base ?>student_profile.php" class="profile-card" style="text-decoration: none; cursor: pointer;">
             <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['student_name'] ?? 'Student') ?>&background=00e5ff&color=000&rounded=true&bold=true" alt="Avatar" class="profile-avatar">
             <div class="profile-info">
                 <p class="profile-name"><?= htmlspecialchars($_SESSION['student_name'] ?? 'Student') ?></p>
                 <p class="profile-email"><?= htmlspecialchars($_SESSION['student_email'] ?? 'student@academy.com') ?></p>
             </div>
-        </div>
+        </a>
 
         <a href="<?= $base ?>Authentication/student_logout.php" class="btn-logout">
             <i class="bi bi-box-arrow-left"></i> Logout
