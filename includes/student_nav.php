@@ -115,8 +115,15 @@ $base = $inDashboard ? '../' : './';
         align-items: center;
         gap: 14px;
         margin-bottom: 16px;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        display: flex;
     }
 
+    a.profile-card:hover {
+        background-color: #1e293b;
+        border-color: #00e5ff;
+    }
+    
     .profile-avatar {
         width: 44px;
         height: 44px;
