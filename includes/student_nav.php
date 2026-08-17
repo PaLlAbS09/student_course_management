@@ -13,7 +13,7 @@ $base = $inDashboard ? '../' : './';
         position: fixed;
         top: 0;
         left: 0;
-        bottom: 0; /* FIXED: Replaced height: 100vh with bottom: 0 to respect mobile browser address bars */
+        bottom: 0; 
         width: 280px;
         background-color: #070b14;
         display: flex;
@@ -29,7 +29,7 @@ $base = $inDashboard ? '../' : './';
         text-align: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         margin-bottom: 10px;
-        flex-shrink: 0; /* FIXED: Prevents header from being squished */
+        flex-shrink: 0; 
     }
 
     .sidebar-brand h3 {
@@ -103,7 +103,7 @@ $base = $inDashboard ? '../' : './';
         padding: 20px 16px;
         background-color: #070b14;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
-        flex-shrink: 0; /* FIXED: Forces footer to stay fully visible at the bottom */
+        flex-shrink: 0; 
     }
 
     .profile-card {
