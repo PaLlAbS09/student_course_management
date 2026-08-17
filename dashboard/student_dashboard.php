@@ -102,9 +102,10 @@ $my_courses = $stmt->fetchAll();
             border-radius: 8px;
             padding: 12px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
             margin-bottom: 16px;
+            flex-wrap: wrap;
         }
 
         .course-icon-box {
@@ -125,7 +126,7 @@ $my_courses = $stmt->fetchAll();
             font-weight: 700;
             font-size: 0.85rem;
             margin: 0;
-            line-height: 1.3;
+            line-height: 1.4;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             flex-grow: 1;
@@ -142,15 +143,18 @@ $my_courses = $stmt->fetchAll();
             text-transform: uppercase;
             letter-spacing: 0.5px;
             white-space: nowrap;
+            flex-shrink: 0; 
         }
 
         .detail-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             padding: 8px 0;
             border-bottom: 1px solid #1a263d;
             font-size: 0.82rem;
+            gap: 10px;
+            flex-wrap: wrap; 
         }
 
         .detail-row:last-of-type {
@@ -164,9 +168,9 @@ $my_courses = $stmt->fetchAll();
         .detail-value {
             color: #e2e8f0;
             font-weight: 600;
+            text-align: right;
         }
 
-        /* Highlighted Fee Box */
         .fee-highlight-box {
             background-color: #1c231a;
             border: 1px solid #3f5223;
@@ -177,6 +181,8 @@ $my_courses = $stmt->fetchAll();
             align-items: center;
             margin-top: 16px;
             width: 100%;
+            flex-wrap: wrap; 
+            gap: 8px;
         }
 
         .fee-label {
@@ -190,18 +196,88 @@ $my_courses = $stmt->fetchAll();
             font-weight: 800;
             font-size: 1rem;
         }
+
+        /* Responsive Safety Padding */
+        @media (max-width: 1200px) {
+            .course-card {
+                padding: 16px;
+            }
+            .card-header-custom {
+                padding: 10px;
+            }
+        }
+
+        /* ========================================================
+           Desktop Mode & Tablet Fix (768px to 1024px)
+           
+           ======================================================== */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .detail-row {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 4px !important;
+                padding: 10px 0 !important;
+            }
+            .detail-value {
+                text-align: left !important;
+                color: #ffffff;
+            }
+            .fee-highlight-box {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 6px !important;
+            }
+            .course-title-text {
+                font-size: 0.8rem !important;
+            }
+        }
+
+        /* ========================================================
+           GLOBAL F FOR AVATAR
+           ======================================================== */
+        aside .rounded-circle, 
+        .sidebar .rounded-circle, 
+        [class*="avatar"], 
+        .user-icon {
+            flex-shrink: 0 !important; 
+            width: 48px !important;
+            height: 48px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: hidden !important;
+        }
+
+        .sidebar p, .sidebar span, [class*="email"] {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        /* ========================================================
+           Mobile Layout  (Under 768px)
+           ======================================================== */
+        @media (max-width: 768px) {
+            
+            .container-fluid {
+                width: 100% !important;
+                max-width: 100vw !important;
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+            /* Note: We have completely removed the body and #sidebar overrides 
+               from here so your off-canvas hamburger menu functions correctly! */
+        }
     </style>
 </head>
 <body>
 
-    
     <?php include '../includes/student_nav.php'; ?>
 
-   
     <div class="container-fluid px-4 py-4">
         <div class="dashboard-frame">
             
-          
             <div class="section-header">
                 <div class="section-title-tag">
                     <h5>MY COURSES</h5>
@@ -209,10 +285,10 @@ $my_courses = $stmt->fetchAll();
                 </div>
             </div>
 
-            
             <?php if(count($my_courses) > 0): ?>
                 <div class="row g-4">
                     <?php foreach($my_courses as $course): ?>
+                        
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="course-card">
                                 <div>
